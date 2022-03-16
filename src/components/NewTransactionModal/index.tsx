@@ -15,7 +15,11 @@ export const NewTransactionModal = ({ isOpen, onRequestClose }: INewTransactionM
         overlayClassName="react-modal-overlay"
         className="react-modal-content"
       >
-        <button type="button" onClick={onRequestClose}>
+        <button 
+          type="button" 
+          onClick={onRequestClose}
+          className="react-modal-close"
+        >
           <img src={closeImg} alt="close modal"/>
         </button>
 
