@@ -40,6 +40,7 @@ export const NewTransactionModal = ({ isOpen, onRequestClose }: INewTransactionM
               type="button" 
               onClick={() => setTransactionType("deposit")} 
               isActive={transactionType === "deposit"}
+              activeColor={"green"}
             >
               <img src={incomeImg} alt="Income"/>
               <span>Income</span>
@@ -49,6 +50,7 @@ export const NewTransactionModal = ({ isOpen, onRequestClose }: INewTransactionM
               type="button" 
               onClick={() => setTransactionType("withdraw")}
               isActive={transactionType === "withdraw"}
+              activeColor={"red"}
             >
               <img src={outcomeImg} alt="Outcome"/>
               <span>Outcome</span>
