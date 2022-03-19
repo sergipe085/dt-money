@@ -3,7 +3,8 @@ import outcomeImg from "../../assets/outcome.svg";
 import incomeImg from "../../assets/income.svg";
 import Modal from "react-modal";
 import { Container, TransactionTypeContainer, RadioBox } from "./styles";
-import { useState } from "react";
+import { FormEvent, useState } from "react";
+import { api } from "../../services/api";
 
 interface INewTransactionModalProps {
   isOpen: boolean;
@@ -11,7 +12,23 @@ interface INewTransactionModalProps {
 }
 
 export const NewTransactionModal = ({ isOpen, onRequestClose }: INewTransactionModalProps) => {
+  const [title, setTitle] = useState("");
+  const [value, setValue] = useState(0);
+  const [category, setCategory] = useState("");
   const [transactionType, setTransactionType] = useState("deposit");
+
+  function handleCreateNewTransaction(event: FormEvent) {
+    event.preventDefault();
+
+    const data = {
+      title, 
+      value,
+      category,
+      transactionType
+    }
+
+    api.post("/api/transactions", data);
+  }
 
   return (
     <Modal 
@@ -28,12 +45,21 @@ export const NewTransactionModal = ({ isOpen, onRequestClose }: INewTransactionM
           <img src={closeImg} alt="close modal"/>
         </button>
 
-        <Container>
+        <Container onSubmit={handleCreateNewTransaction}>
           <h2>Create Transaction</h2> 
 
-          <input placeholder="Title"/>
+          <input 
+            value={title} 
+            onChange={(event) => setTitle(event.target.value)} 
+            placeholder="Title"
+          />
 
-          <input placeholder="Value" type="number"/>
+          <input 
+            value={value} 
+            onChange={(event) => setValue(Number(event.target.value))} 
+            placeholder="Value" 
+            type="number"
+          />
 
           <TransactionTypeContainer>
             <RadioBox 
@@ -57,7 +83,11 @@ export const NewTransactionModal = ({ isOpen, onRequestClose }: INewTransactionM
             </RadioBox>
           </TransactionTypeContainer>
 
-          <input placeholder="Category"/>
+          <input 
+            value={category} 
+            onChange={(event) => setCategory(event.target.value)} 
+            placeholder="Category"
+          />
 
           <button type="submit">Submit</button>
         </Container>

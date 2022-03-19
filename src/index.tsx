@@ -18,7 +18,12 @@ createServer({
           createdAt: Date.now()
         }
       ]
-    })
+    });
+
+    this.post("/transactions", (schema, req) => {
+      const data = JSON.parse(req.requestBody);
+      return data;
+    });
   }
 })
 
