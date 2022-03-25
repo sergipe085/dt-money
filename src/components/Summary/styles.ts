@@ -26,8 +26,13 @@ export const Container = styled.main`
             line-height: 3rem;
         }
 
-        &.highlitBackground {
+        &.positiveTotal {
             background: var(--green);
+            color: #fff;
+        }
+
+        &.negativeTotal {
+            background: var(--red);
             color: #fff;
         }
     }
